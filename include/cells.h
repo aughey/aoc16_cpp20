@@ -55,7 +55,6 @@ namespace cells
             {
                 return std::nullopt;
             }
-            std::cout << "x: " << x << " y: " << y << " width: " << width() << " height: " << height() << "\n";
             return cells_[y][x];
         }
         inline int width() const

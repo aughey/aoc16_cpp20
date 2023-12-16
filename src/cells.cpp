@@ -106,8 +106,6 @@ namespace cells
             // unwrap cell from optional
             auto cell = opt_cell.value();
 
-            std::cout << "At location: " << std::get<0>(beam.location) << ", " << std::get<1>(beam.location) << " with direction: " << static_cast<int>(beam.direction) << "\n";
-
             if (occupy_grid.visit(beam.location, beam.direction))
             {
                 auto next_possible = next_possible_beams(cell, beam.direction, beam.location);
