@@ -1,8 +1,11 @@
+#pragma once
 #include <vector>
 #include <optional>
 #include <tuple>
 #include <ranges>
 #include <set>
+#include <iostream>
+#include <memory>
 
 namespace cells
 {
@@ -52,6 +55,7 @@ namespace cells
             {
                 return std::nullopt;
             }
+            std::cout << "x: " << x << " y: " << y << " width: " << width() << " height: " << height() << "\n";
             return cells_[y][x];
         }
         inline int width() const
@@ -78,9 +82,10 @@ namespace cells
     /// @return
     inline auto next_possible_locations(const Cell &self, const Direction &cur_direction, const XY &cur_location)
     {
-        auto possible_directions = next_directions(self, cur_direction);
-        return possible_directions | std::views::transform(
-                                         [cur_location](auto &new_direction)
+        auto dir_copy = std::make_shared<std::vector<Direction>>(next_directions(self, cur_direction));
+      
+        return *dir_copy | std::views::transform(
+                                         [cur_location,dir_copy](const Direction &new_direction)
                                          {
                                              auto dx_dy = delta(new_direction);
                                              auto new_location = std::make_tuple(std::get<0>(cur_location) + std::get<0>(dx_dy), std::get<1>(cur_location) + std::get<1>(dx_dy));
@@ -133,7 +138,9 @@ namespace cells
             {
                 for (auto &cell : row)
                 {
-                    count += cell.size();
+                    if(!cell.empty()) {
+                        count++;
+                    }
                 }
             }
             return count;

@@ -15,9 +15,9 @@ namespace cells
             switch (entry)
             {
             case Direction::Up:
-                return {Direction::Up};
+                return {entry};
             case Direction::Down:
-                return {Direction::Down};
+                return {entry};
             case Direction::Left:
                 return {Direction::Up, Direction::Down};
             case Direction::Right:
@@ -32,9 +32,9 @@ namespace cells
             case Direction::Down:
                 return {Direction::Left, Direction::Right};
             case Direction::Left:
-                return {Direction::Left};
+                return {entry};
             case Direction::Right:
-                return {Direction::Right};
+                return {entry};
             }
             break;
         case Cell::Slash:
@@ -69,7 +69,6 @@ namespace cells
 
     XY delta(const Direction &direction)
     {
-        std::cout << "direction: " << static_cast<int>(direction) << std::endl;
         switch (direction)
         {
         case Direction::Up:
@@ -84,7 +83,7 @@ namespace cells
         throw std::runtime_error("untested direction");
     };
 
-    ssize_t trace_grid(const Grid &grid,const  XY &entry_location, const Direction &entry_direction)
+    ssize_t trace_grid(const Grid &grid, const XY &entry_location, const Direction &entry_direction)
     {
         // Active beams
         std::vector<Beam> beams = {Beam(entry_location, entry_direction)};
@@ -106,6 +105,8 @@ namespace cells
             }
             // unwrap cell from optional
             auto cell = opt_cell.value();
+
+            std::cout << "At location: " << std::get<0>(beam.location) << ", " << std::get<1>(beam.location) << " with direction: " << static_cast<int>(beam.direction) << "\n";
 
             if (occupy_grid.visit(beam.location, beam.direction))
             {

@@ -12,6 +12,8 @@ enable_testing()
 
 # Add the executable
 add_executable(your_project main.cpp)
+# add your_project_lib to the executable
+target_link_libraries(your_project PRIVATE your_project_lib)
 
 # Include directories
 include_directories(include)
