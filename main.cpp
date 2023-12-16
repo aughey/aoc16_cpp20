@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 
 int main() {
-    std::cout << "Hello, world!" << std::endl;
+    std::ifstream file("problem.txt");
+
     return 0;
 }

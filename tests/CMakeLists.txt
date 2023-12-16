@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.14) # Make sure this version is compatible with FetchContent
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -10,9 +13,16 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
 
-# Now simply link your tests against gtest_main
+# Include the GoogleTest library. This defines the gtest and gtest_main targets.
+include(GoogleTest)
+
+# Add your test executable
 file(GLOB TEST_SOURCES "*.cpp")
-add_executable(your_project_tests ${TEST_SOURCES})
-target_link_libraries(your_project_tests gtest_main your_project_lib)
+add_executable(tests ${TEST_SOURCES})
+
+# Link your test executable against gtest & gtest_main
+target_link_libraries(tests gtest_main your_project_lib)
+
+# Discover test cases
+gtest_discover_tests(tests)
