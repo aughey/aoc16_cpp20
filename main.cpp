@@ -21,7 +21,7 @@ int main()
         }
     }
 
-    auto grid = lib::lines_to_cells(file_contents);
+    auto grid = lib::lines_to_grid(file_contents);
 
     cells::XY start = {0, 0};
     cells::Direction direction = cells::Direction::Right;

@@ -6,7 +6,7 @@
 
 TEST(CellReading, LoadingWorks) {
     auto data = std::string(lib::sample_data());
-    auto cells = lib::lines_to_cells(data);
+    auto cells = lib::lines_to_grid(data);
 
     ASSERT_EQ(cells.width(), 10);
     ASSERT_EQ(cells.height(), 10);
@@ -17,7 +17,7 @@ TEST(CellReading, LoadingWorks) {
 
 TEST(CellReading, OutOfRangeFails) {
     auto data = std::string(lib::sample_data());
-    auto cells = lib::lines_to_cells(data);
+    auto cells = lib::lines_to_grid(data);
 
     ASSERT_EQ(cells.width(), 10);
     ASSERT_EQ(cells.height(), 10);

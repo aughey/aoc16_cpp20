@@ -44,7 +44,7 @@ namespace lib
     {
         return line | std::views::split('\n');
     }
-    cells::Grid lines_to_cells(const std::string &lines)
+    cells::Grid lines_to_grid(const std::string &lines)
     {
         std::vector<std::vector<cells::Cell>> data;
         for (const auto &line : split_line_on_newline(lines))

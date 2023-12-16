@@ -5,5 +5,5 @@
 namespace lib
 {
     const char *sample_data();
-    cells::Grid lines_to_cells(const std::string &lines);
+    cells::Grid lines_to_grid(const std::string &lines);
 }
