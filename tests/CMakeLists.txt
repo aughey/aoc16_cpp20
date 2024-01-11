@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.14) # Make sure this version is compatible with FetchContent
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
 include(FetchContent)
 
 FetchContent_Declare(
@@ -22,7 +19,7 @@ file(GLOB TEST_SOURCES "*.cpp")
 add_executable(tests ${TEST_SOURCES})
 
 # Link your test executable against gtest & gtest_main
-target_link_libraries(tests gtest_main your_project_lib)
+target_link_libraries(tests gtest_main aoc_lib)
 
 # Discover test cases
 gtest_discover_tests(tests)

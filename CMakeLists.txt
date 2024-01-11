@@ -5,15 +5,18 @@ project(your_project_name VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_compile_options(-Wall -Wextra -pedantic -Werror)
+# Set the runtime library for all targets
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+#add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 # Add this to enable testing in your project
 enable_testing()
 
 # Add the executable
 add_executable(your_project main.cpp)
-# add your_project_lib to the executable
-target_link_libraries(your_project PRIVATE your_project_lib)
+# add your_project_lib to the executaaoc_libble
+target_link_libraries(your_project PUBLIC aoc_lib)
 
 # Include directories
 include_directories(include)

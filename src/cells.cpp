@@ -1,6 +1,7 @@
 #include "cells.h"
 #include <stdexcept>
 #include <iostream>
+#include <sys/types.h>
 
 namespace cells
 {
@@ -83,7 +84,7 @@ namespace cells
         throw std::runtime_error("untested direction");
     };
 
-    ssize_t trace_grid(const Grid &grid, const XY &entry_location, const Direction &entry_direction)
+    std::size_t trace_grid(const Grid &grid, const XY &entry_location, const Direction &entry_direction)
     {
         // Active beams
         std::vector<Beam> beams = {Beam(entry_location, entry_direction)};

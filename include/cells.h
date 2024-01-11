@@ -63,11 +63,11 @@ namespace cells
             {
                 return 0;
             }
-            return cells_[0].size();
+            return static_cast<int>(cells_[0].size());
         }
         inline int height() const
         {
-            return cells_.size();
+            return static_cast<int>(cells_.size());
         }
 
     private:
@@ -130,9 +130,9 @@ namespace cells
             directions.insert(direction);
             return true;
         }
-        ssize_t occupied_count()
+        std::size_t occupied_count()
         {
-            ssize_t count = 0;
+            std::size_t count = 0;
             for (auto &row : grid_)
             {
                 for (auto &cell : row)
@@ -146,5 +146,5 @@ namespace cells
         }
     };
 
-    ssize_t trace_grid(const Grid &grid, const XY &entry_location, const Direction &entry_direction);
+    std::size_t trace_grid(const Grid &grid, const XY &entry_location, const Direction &entry_direction);
 }
