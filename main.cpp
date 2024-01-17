@@ -1,10 +1,43 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <tuple>
+#include <ranges>
 #include "lib.h"
 #include "cells.h"
 
+auto read_file(const char *filename)
+{
+    std::ifstream file(filename);
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    return buffer.str();
+}
+
+auto split_lines(const std::string contents) {
+    return contents | std::ranges::views::split('\n') | std::ranges::views::transform([](auto &&rng) {
+        return std::string(rng.begin(), rng.end());
+    });
+}
+
+auto problem_lines(const char *filename) {
+    auto contents = read_file(filename);
+    return split_lines(contents);
+}
+
 int main()
 {
+    auto filename = "problem.txt";
+    auto contents = read_file(filename);
+    for(auto line : split_lines(contents)) {
+        std::cout << "LINE: " << line << "\n";
+    }
+
+    for(auto line : problem_lines(filename)) {
+        std::cout << "Problem LINE: " << line << "\n";
+    }
+
+    return 0;
 
     // read file to string
     std::string file_contents;
