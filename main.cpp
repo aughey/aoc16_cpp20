@@ -6,7 +6,13 @@
 #include "lib.h"
 #include "cells.h"
 
-auto read_file(const char *filename)
+auto file_lines(const char *filename) {
+    std::ifstream file(filename);
+    // use ranges to split this into lines
+    return std::ranges::istream_view<std::string>(file);
+}
+
+std::string read_file(const char *filename)
 {
     std::ifstream file(filename);
     std::stringstream buffer;
@@ -20,6 +26,14 @@ auto split_lines(const std::string contents) {
     });
 }
 
+auto split_lines_collected(const std::string &contents) {
+    std::vector<std::string> lines;
+    for(auto &&rng : contents | std::ranges::views::split('\n')) {
+        lines.push_back(std::string(rng.begin(), rng.end()));
+    }
+    return lines;
+}
+
 auto problem_lines(const char *filename) {
     auto contents = read_file(filename);
     return split_lines(contents);
@@ -28,6 +42,13 @@ auto problem_lines(const char *filename) {
 int main()
 {
     auto filename = "problem.txt";
+    // std::ifstream file(filename);
+    // // use ranges to split this into lines
+    // auto lines =  file | std::ranges::views::split("\n");
+    // for(auto line : lines) {
+    //     std::cout << "LINE: " << line << "\n";
+    // }
+    // return 0;
     auto contents = read_file(filename);
     for(auto line : split_lines(contents)) {
         std::cout << "LINE: " << line << "\n";
