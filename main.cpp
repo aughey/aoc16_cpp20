@@ -20,7 +20,7 @@ std::string read_file(const char *filename)
     return buffer.str();
 }
 
-auto split_lines(const std::string contents) {
+auto split_lines(const std::string &contents) {
     return contents | std::ranges::views::split('\n') | std::ranges::views::transform([](auto &&rng) {
         return std::string(rng.begin(), rng.end());
     });
